@@ -1,0 +1,54 @@
+# =====================================================================
+# SILICOSIS DETECTION SYSTEM — GLOBAL CONFIGURATION
+# =====================================================================
+# File: config.yaml
+# Purpose: All system settings live here. No hardcoded paths or values
+#          are allowed inside the Python source code.
+# =====================================================================
+
+model_settings:
+  # Binary silicosis screening classifier (EfficientNet-B4)
+  binary_model_path: "models/binary_model.onnx"
+  binary_architecture: "EfficientNet-B4"
+  binary_confidence_threshold: 0.5         # Use 0.811 for clinical (Youden optimal)
+  binary_youden_threshold: 0.811           # High-specificity threshold for clinical use
+
+  # Multi-label finding classifier (EfficientNet-B4, 8 classes)
+  finding_model_path: "models/finding_model.onnx"
+  finding_architecture: "EfficientNet-B4"
+  finding_confidence_threshold: 0.4        # Findings above this are marked Present
+  finding_classes:
+    - "Multiple Nodules / Nodular Opacity"
+    - "Hilum Abnormality"
+    - "Consolidation"
+    - "Fibrosis"
+    - "Cavity"
+    - "Bronchiectasis"
+    - "Ground Glass Opacity"
+    - "Pleural Thickening"
+
+  # MedGemma report generator (runs remotely on Kaggle via ngrok)
+  # This model is NOT deployed inside the Docker container due to hardware
+  # constraints (4.3B parameter VLM requires 16GB+ VRAM GPU).
+  # See README.md for instructions on starting the Kaggle inference server.
+  medgemma_base_model: "google/medgemma-4b-it"
+  medgemma_adapter_dataset: "aryajadhav03/medgemma_adapter"  # Kaggle dataset
+  medgemma_timeout_seconds: 60
+
+image_settings:
+  target_width: 380
+  target_height: 380
+  channels: 3                              # RGB (not grayscale — JPEGs from IIT Jodhpur)
+  medgemma_resize: 336                     # MedGemma internal image size
+
+server_settings:
+  host: "0.0.0.0"
+  port: 8000
+
+kaggle_api:
+  # Set this URL after starting the Kaggle notebook MedGemma server.
+  # Format: https://xxxx-xx-xx-xxx-xxx.ngrok-free.app
+  # Leave as empty string if not using MedGemma report generation.
+  ngrok_url: "https://boots-fritter-fancied.ngrok-free.dev"
+  health_endpoint: "/health"
+  report_endpoint: "/generate-report"

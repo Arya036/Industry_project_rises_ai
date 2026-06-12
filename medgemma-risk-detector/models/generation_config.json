@@ -1,0 +1,11 @@
+{
+  "_name_or_path": "google/medgemma-4b-it",
+  "bos_token_id": 2,
+  "eos_token_id": 1,
+  "pad_token_id": 0,
+  "max_new_tokens": 256,
+  "do_sample": false,
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "transformers_version": "4.40.0"
+}

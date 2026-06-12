@@ -1,0 +1,21 @@
+# Web framework
+fastapi==0.110.0
+uvicorn==0.28.0
+
+# Config parsing
+pyyaml==6.0.1
+pydantic==2.6.4
+
+# Image processing
+numpy==1.26.4
+opencv-python-headless==4.9.0.80
+Pillow==10.2.0
+
+# ONNX inference engine (CPU — replaces PyTorch inside container)
+onnxruntime==1.17.1
+
+# HTTP client (for calling Kaggle MedGemma API)
+requests==2.31.0
+
+# File upload handling
+python-multipart==0.0.9

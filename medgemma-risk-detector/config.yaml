@@ -1,0 +1,33 @@
+# =====================================================================
+# MEDGEMMA / VISION-LANGUAGE MODEL RISK DETECTOR CONFIGURATION
+# =====================================================================
+# File: config.yaml
+# Purpose: All system settings live here. Absolute paths must be avoided.
+# =====================================================================
+
+model_settings:
+  # Relative paths to the ONNX models inside /models
+  encoder_model_path: "models/encoder_model.onnx"
+  decoder_model_path: "models/decoder_model.onnx"
+  
+  # Relative paths to LoRA adapter and tokenizer weights
+  adapter_config_path: "models/adapter_config.json"
+  adapter_weights_path: "models/adapter_model.safetensors"
+  tokenizer_path: "models/tokenizer.json"
+  generation_config_path: "models/generation_config.json"
+
+  # Confidence threshold for binary classification prediction (abnormal vs normal)
+  # Uses Youden-optimal threshold of 0.5 (or customized value)
+  binary_confidence_threshold: 0.5
+
+image_settings:
+  # Binary classifier preprocessor dimensions (EfficientNet-B4 input)
+  target_width: 380
+  target_height: 380
+  
+  # MedGemma VLM preprocessor dimension (SigLIP input size)
+  medgemma_resize: 336
+
+server_settings:
+  host: "0.0.0.0"
+  port: 8000

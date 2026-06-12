@@ -1,0 +1,38 @@
+# Exclude training pipeline (not needed at inference time)
+pipeline/
+
+# Exclude Kaggle API server (runs on Kaggle, not in container)
+kaggle_api/
+
+# Exclude sample data (not needed in container)
+data/
+
+# Exclude large training weight files (only .onnx goes in container)
+*.pth
+*.pt
+*.h5
+
+# Exclude notebooks and development files
+*.ipynb
+*.ipynb_checkpoints/
+
+# Exclude frontend (served separately or not at all)
+frontend/
+
+# Exclude secrets and local config overrides
+config.json
+.env
+*.env
+
+# Exclude git and cache
+.git/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Exclude documentation
+*.md
+*.txt
+!requirements.txt
