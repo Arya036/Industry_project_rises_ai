@@ -182,7 +182,7 @@ Submit a chest X-ray image for full screening, finding detection, and clinical r
 
 ## 6. Disclaimers & Known Limitations
 
-1. **Evaluation Scope**: The binary classifier achieved an AUC of **0.9078** on internal testing (IIT Jodhpur dataset). Performance on external hospital machines may degrade to **0.83 - 0.87** due to differences in scanner calibration.
+1. **Evaluation Scope**: The binary classifier achieved an AUC of **0.8888** on internal testing (IIT Jodhpur dataset). Performance on external hospital machines may degrade to **0.83 - 0.87** due to differences in scanner calibration.
 2. **TB Confounding**: Tuberculosis (TB) and silicosis present highly similar visual characteristics. The model may trigger false positives on TB-positive/silicosis-negative patients. Specificity at a default threshold of 0.5 is 67.2%; using the Youden threshold of 0.811 raises specificity to **84.3%** at the cost of slight sensitivity reduction.
 3. **Reliability of Finding Classifier**: Only *Consolidation* (AUC 0.86) and *Cavity* (AUC 0.78) have high clinical reliability. Findings like *Hilum Abnormality* (AUC 0.37) are unreliable and should not be used as clinical indicators.
 4. **ONNX GradCAM Approximation**: True backpropagation-based GradCAM is not supported under ONNX Runtime CPU execution. The container serves a Gaussian saliency heatmap overlay. Real GradCAM is available in PyTorch scripts in `src/` for GPU environments.
